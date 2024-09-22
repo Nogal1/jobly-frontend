@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../UserContext";
-import styles from "./NavBar.module.css"; // Import custom CSS module
+import styles from "./NavBar.module.css"; // Custom styles if needed
 
 /** NavBar: Navigation bar component */
 function NavBar({ logout }) {

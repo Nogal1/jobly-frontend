@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-/** CompanyCard component displays basic company info */
-function CompanyCard({ handle, name, description }) {
+/** CompanyCard: renders individual company card */
+function CompanyCard({ company }) {
+  console.log("Company data:", company); // Add this line to check the received company data
+
   return (
-    <div className="CompanyCard">
-      <Link to={`/companies/${handle}`}>
-        <h3>{name}</h3>
-        <p>{description}</p>
-      </Link>
+    <div className="card">
+      <div className="card-body">
+        <h5 className="card-title">
+          <Link to={`/companies/${company.handle}`}>{company.name}</Link>
+        </h5>
+        <p className="card-text">{company.description}</p>
+      </div>
     </div>
   );
 }

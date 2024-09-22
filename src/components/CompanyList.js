@@ -1,45 +1,38 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api";
-import CompanyCard from "./CompanyCard";
-import SearchForm from "./SearchForm";
+import CompanyCard from "./CompanyCard"; // Assuming you have a component to render each company
 
-/** CompanyList component to fetch and display all companies */
+/** CompanyList: renders a list of CompanyCards */
 function CompanyList() {
   const [companies, setCompanies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function getCompanies() {
-      let companies = await JoblyApi.getCompanies();
-      setCompanies(companies);
-      setIsLoading(false);
+    async function fetchCompanies() {
+      try {
+        const companies = await JoblyApi.getCompanies();
+        setCompanies(companies);
+      } catch (err) {
+        console.error("Failed to fetch companies", err);
+      }
     }
-    getCompanies();
+
+    fetchCompanies();
   }, []);
 
-  // Search handler function
-  async function handleSearch(searchTerm) {
-    let companies = await JoblyApi.getCompanies(searchTerm);
-    setCompanies(companies);
-  }
-
-  if (isLoading) return <p>Loading...</p>;
-
   return (
-    <div className="CompanyList">
-      <SearchForm search={handleSearch} />
-      {companies.length ? (
-        companies.map(c => (
-          <CompanyCard
-            key={c.handle}
-            handle={c.handle}
-            name={c.name}
-            description={c.description}
-          />
-        ))
-      ) : (
-        <p>No companies found.</p>
-      )}
+    <div className="container mt-4">
+      <h1 className="mb-4">Companies</h1>
+      <div className="row">
+        {companies.length ? (
+          companies.map(company => (
+            <div className="col-md-6 mb-4" key={company.handle}>
+              <CompanyCard company={company} />
+            </div>
+          ))
+        ) : (
+          <p>Loading companies...</p>
+        )}
+      </div>
     </div>
   );
 }
