@@ -22,18 +22,21 @@ function JobList() {
   }, []);
 
   return (
-    <div className="JobList">
-      {jobs.length ? (
-        jobs.map(job => (
-          <JobCard
-            key={job.id}
-            job={job}
-            hasApplied={currentUser.applications.includes(job.id)} // Check if the user has applied
-          />
-        ))
-      ) : (
-        <p>Loading jobs...</p>
-      )}
+    <div className="container">
+      <div className="row">
+        {jobs.length ? (
+          jobs.map((job) => (
+            <div className="col-md-4 mb-4" key={job.id}>
+              <JobCard
+                job={job}
+                hasApplied={currentUser.applications.includes(job.id)}
+              />
+            </div>
+          ))
+        ) : (
+          <p>Loading jobs...</p>
+        )}
+      </div>
     </div>
   );
 }

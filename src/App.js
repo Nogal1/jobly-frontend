@@ -12,6 +12,7 @@ import { jwtDecode } from "jwt-decode";
 import JoblyApi from "./api";
 import UserContext from "./UserContext";
 import useLocalStorage from "./hooks/useLocalStorage"; // Custom hook for localStorage management
+import './App.css';
 
 /** App component that handles routing, authentication, and navigation */
 function App() {
